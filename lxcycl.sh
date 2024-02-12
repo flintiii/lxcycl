@@ -1,6 +1,6 @@
 #! /usr/bin/bash
 # Sun 11 Feb 2024 11:14:54 AM EST pflint 
-name="Linux Containter CYCle"
+name="LinuX Containter CYCle"
 pname="lxcycl.sh"
 version="0.2024.02.12
 "
