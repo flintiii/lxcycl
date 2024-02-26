@@ -2,10 +2,10 @@
 # Sun 11 Feb 2024 11:14:54 AM EST pflint 
 name="LinuX Containter CYCle"
 pname="lxcycl.sh"
-version="0.2024.02.12
-"
+version="0.2024.02.24"
 #
-# Installs docker as part of sane.
+# Fri 23 Feb 2024 11:38:56 AM EST 
+# Install docker as part of sane.
 #
 #
 function help(){
@@ -24,8 +24,8 @@ cat $0 | grep '^## ' | sed -e 's/##//'
 ##  - adalias    - Adds flint custom alias file to user space.
 ##  - flink/flunk- Patches or removes argumment to current user path.
 ##  - bupdate    - update packages and backup package file.
-## Linux Containers (LXC)
-##  - dkrlst        - creates a docker instance.
+## Containers 
+##  - dkrlst        - lists docker images.
 ##  - create <NAME> - creates a docker instance.
 ##  - update <NAME> - updates your git repository.
 ##  - dkrcon <NAME> - starts and connects to local docker instance.
@@ -49,10 +49,27 @@ uroot
 } # Test: lxcycl.sh dummy
 #
 #
-function dkrlst(){
-#* function dkrlst - creates a dicker instance with NAME
+#
+function ddkr(){
+#* function ddkr - docker hunting
 echo "This is the \""$FUNCNAME"\" function in "$0" version "$version #debug
 # uroot
+./lxcycl.sh  dkrlst 
+read
+cat /tmp/tasklst |cut -c16- | cut -c-16 |while read line; 
+do  
+	echo "distroyiing "$line
+	read
+	echo docker stop $line; 
+	echo docker rm $line; 
+done
+} # Test: lxcycl.sh dummy
+#
+function dkrlst(){
+#* function dkrlst - lists docker images
+echo "This is the \""$FUNCNAME"\" function in "$0" version "$version #debug
+# uroot
+clear
 docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Image}}"
 } # Test: lxcycl.sh lxc-create
 #
@@ -331,6 +348,7 @@ if [ "$#" -eq "1" ] && [ "$1" = "tpiclle"     ]; then ARGS="1"; fi
 if [ "$#" -eq "1" ] && [ "$1" = "uroot"       ]; then ARGS="1"; fi
 if [ "$#" -eq "1" ] && [ "$1" = "spause"      ]; then ARGS="1"; fi
 if [ "$#" -eq "1" ] && [ "$1" = "sane"        ]; then ARGS="1"; fi
+if [ "$#" -eq "1" ] && [ "$1" = "ddkr"        ]; then ARGS="1"; fi
 if [ "$#" -eq "1" ] && [ "$1" = "help"        ]; then ARGS="9"; fi
 # this tests the evaluator...
 #D echo $#"     "$1"    "$2"    "$3"    "$ARGS ;spause
